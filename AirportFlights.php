@@ -7,66 +7,34 @@ Version: 0.0.1
 Author: JUAN CUÑEZ
 */
 
-include_once ('includes/funtions.php');
+//* Don't access this file directly
+defined( 'ABSPATH' ) or die();
 
 add_action( 'admin_menu', function(){
 	add_menu_page(
 		'Flights Management',
 		'Flights Management',
-		'edit_airlines',
+		'manage_airlines',
 		'flights_management?',
 		'flightManagementLayout',
-		plugins_url().'/AirportFlights/assets/airplane.png',
+		plugins_url().'/AirportFlights/assets/images/airplane.png',
 		'2'
 	);
 });
 
-function flightManagementLayout(){
-
+function vueScript() {
+	if ( ! did_action( 'wp_enqueue_media' ) ) wp_enqueue_media();
+	wp_enqueue_script( 'vueScript',  plugins_url( '/AirportFlights/assets/js/vue.js'), array('jquery'), null, false );
 }
-
-add_action('init', function (){
-	add_role( 'flights_manager', 'Flights Manager');
-	register_post_type( 'airline',
-		array(
-			'labels' => array(
-				'name' => __( 'Airlines' ),
-				'singular_name' => __( 'Airline' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'airline'),
-			'show_in_rest' => true,
-			'map_meta_cap'    => true,
-			'capability_type' => 'airlines',
-			'supports'            => array( 'title', 'thumbnail' ),
-			'capabilities' => setCapabilities('airline'),
-			'show_in_menu' => 'flights_management',
-		)
-	);
-});
-
-function addOrRemoveCapability($isAdd = true) {
-	$flightManager = get_role('flights_manager');
-	$administrator = get_role( 'administrator' );
-
-	foreach( getCapabilities('airline') as $cap ) {
-		if($isAdd){
-			$flightManager->add_cap( $cap );
-			$administrator->add_cap( $cap );
-		}else{
-			$flightManager->remove_cap( $cap );
-			$administrator->remove_cap( $cap );
-		}
-
-	}
-}
+add_action( 'admin_enqueue_scripts', 'vueScript' );
 
 
-register_activation_hook( __FILE__, function (){
-	addOrRemoveCapability();
-} );
+include_once ('panel.php');
 
-register_deactivation_hook( __FILE__, function (){
-	addOrRemoveCapability(false);
-} );
+include_once ('post_types/flight.php');
+include_once ('taxonomies/airline.php');
+include_once( 'taxonomies/place.php' );
+include_once ('taxonomies/door.php');
+include_once ('taxonomies/status.php');
+include_once ('permission/airline.php');
+include_once ('general/footer.php');
