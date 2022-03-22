@@ -37,6 +37,7 @@ add_action('init', function (){
 add_action( 'admin_head', 'remove_parent_taxonomy' );
 
 function remove_parent_taxonomy(){
+    if(!isset($_GET['taxonomy'])) return;
     $taxonomies = ['place', 'airline', 'door', 'status'];
 	if ( !in_array($_GET['taxonomy'], $taxonomies) ) return;
 	$parent = 'parent()';
