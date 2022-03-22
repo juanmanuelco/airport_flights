@@ -34,7 +34,7 @@ add_action('init', function (){
 	));
 });
 
-add_action( 'admin_head-edit-tags.php', 'remove_parent_taxonomy' );
+add_action( 'admin_head', 'remove_parent_taxonomy' );
 
 function remove_parent_taxonomy(){
     $taxonomies = ['place', 'airline', 'door', 'status'];
@@ -46,6 +46,8 @@ function remove_parent_taxonomy(){
 	<script type="text/javascript">
         jQuery(document).ready(function($){
             $('label[for=parent]').<?php echo $parent; ?>.remove();
+            let edited_parent = $('.term-parent-wrap');
+            if(edited_parent.length > 0) edited_parent[0].remove();
         });
 	</script>
 	<?php
