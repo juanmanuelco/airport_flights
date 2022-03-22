@@ -30,6 +30,18 @@ add_action('admin_footer', function() {
                     alert('<?php echo __('Only one door can be selected ', 'Only one door can be selected ') ?>');
                     return false;
                 }
+
+                let $status = $('#status-all > ul');
+                if ($status.find('input:checked').length < 1) {
+                    alert('<?php echo __('Status is required', 'Status is required') ?>');
+                    return false;
+                }
+                if ($status.find('input:checked').length > 1) {
+                    alert('<?php echo __('Only one status can be selected ', 'Only one status can be selected ') ?>');
+                    return false;
+                }
+
+
                 title.value = `<?php echo __('Code') ?>: ${flight_app.flight_code}, <?php echo __('Type') ?>: ${flight_app.currentType} `
             });
         });
