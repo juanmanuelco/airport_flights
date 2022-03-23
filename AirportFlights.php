@@ -38,3 +38,4 @@ include_once ('taxonomies/door.php');
 include_once ('taxonomies/status.php');
 include_once ('permission/airline.php');
 include_once ('general/footer.php');
+include_once ('shortcodes/menu.php');
