@@ -33,6 +33,8 @@
                 position: relative;
                 width: 100%;
                 background-image: url("<?php echo plugins_url().'/AirportFlights/assets/images/airport.png' ?>");
+                background-repeat: no-repeat;
+                background-size: cover;
             }
             #wpcontent{
                 padding-left: 0px !important;
