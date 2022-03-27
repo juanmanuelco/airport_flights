@@ -37,19 +37,19 @@ add_action( 'init', function () {
 
 function status_add_custom_field() {
 	?>
-<!--    <div class="form-field">-->
-<!--        <label for="status_show_estimate">--><?php //_e( 'Show estimation' ); ?><!--</label>-->
-<!--        <input type="checkbox" name="status_show_estimate" id="status_show_estimate" >-->
-<!--    </div>-->
+    <div class="form-field">
+        <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
+        <input type="checkbox" name="status_hidden" id="status_hidden" >
+    </div>
 
 	<div class="form-field">
 		<label for="status_bk_color"><?php _e( 'Background color' ); ?></label>
-		<input type="color" name="status_bk_color" id="status_bk_color" value="#000000">
+		<input type="color" name="status_bk_color" id="status_bk_color" value="#ffffff">
 	</div>
 
 	<div class="form-field">
 		<label for="status_txt_color"><?php _e( 'Text color' ); ?></label>
-		<input type="color" name="status_txt_color" id="status_txt_color" value="#ffffff">
+		<input type="color" name="status_txt_color" id="status_txt_color" value="#000000">
 	</div>
 	<?php
 }
@@ -59,17 +59,17 @@ add_action( 'status_add_form_fields', 'status_add_custom_field', 10, 2 );
 function status_edit_custom_field($term) {
 	$bk_color = get_term_meta($term->term_id, 'status_bk_color', true);
 	$txt_color = get_term_meta($term->term_id, 'status_txt_color', true);
-	//$show_estimation = get_term_meta($term->term_id, 'show_estimation', true);
+	$status_hidden = get_term_meta($term->term_id, 'status_hidden', true);
 	?>
 
-<!--    <tr class="form-field term-bk_color-wrap">-->
-<!--        <th scope="row">-->
-<!--            <label for="status_show_estimate">--><?php //_e( 'Show estimation' ); ?><!--</label>-->
-<!--        </th>-->
-<!--        <td>-->
-<!--            <input type="checkbox" name="status_show_estimate" id="status_show_estimate" --><?php //echo $show_estimation? 'checked' : '' ;  ?><!-- >-->
-<!--        </td>-->
-<!--    </tr>-->
+    <tr class="form-field term-bk_color-wrap">
+        <th scope="row">
+            <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
+        </th>
+        <td>
+            <input type="checkbox" name="status_hidden" id="status_hidden" <?php echo $status_hidden? 'checked' : '' ;  ?> >
+        </td>
+    </tr>
 
 	<tr class="form-field term-bk_color-wrap">
 		<th scope="row">
@@ -94,9 +94,21 @@ add_action( 'status_edit_form_fields', 'status_edit_custom_field', 10, 2 );
 
 
 function save_taxonomy_status_meta_field( $term_id ) {
-	if ( isset( $_POST['status_bk_color'] ) ) update_term_meta($term_id, 'status_bk_color', $_POST['status_bk_color']);
-	if ( isset( $_POST['status_txt_color'] ) ) update_term_meta($term_id, 'status_txt_color', $_POST['status_txt_color']);
-	//if ( isset( $_POST['status_show_estimate'] ) ) update_term_meta($term_id, 'show_estimation', $_POST['status_show_estimate']);
+	if ( isset( $_POST['status_bk_color'] ) ) {
+		update_term_meta($term_id, 'status_bk_color', $_POST['status_bk_color']);
+    }else{
+		update_term_meta($term_id, 'status_bk_color', '#ffffff');
+    }
+	if ( isset( $_POST['status_txt_color'] ) ) {
+		update_term_meta($term_id, 'status_txt_color', $_POST['status_txt_color']);
+    }else{
+		update_term_meta($term_id, 'status_txt_color', '#000000');
+    }
+	if ( isset( $_POST['status_hidden'] ) ) {
+		update_term_meta( $term_id, 'status_hidden', $_POST['status_hidden'] );
+    }else{
+		update_term_meta( $term_id, 'status_hidden', 'off' );
+    };
 }
 add_action( 'edited_status', 'save_taxonomy_status_meta_field', 10, 2 );
 add_action( 'create_status', 'save_taxonomy_status_meta_field', 10, 2 );

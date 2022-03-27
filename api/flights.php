@@ -15,7 +15,7 @@ function flightList(WP_REST_Request $request){
 			'post_type'             => 'flight',
 			'post_status'           => 'publish',
 			'ignore_sticky_posts'   => 1,
-			'orderby'               =>'date',
+			'orderby'               => 'date',
 			'order'                 => 'DESC',
 			'posts_per_page'        => -1,
 			'meta_query' => array(
@@ -45,10 +45,16 @@ function flightList(WP_REST_Request $request){
 				}
 				$terms = array_merge($terms, [$taxonomy => $tax_terms ]);
 			}
+			$post_metas = get_post_meta($p);
+			foreach ($post_metas as $key => $post_meta){
+				if($key == '_wp_flight-destination_meta_key' || $key == '_wp_flight-origin_meta_key'){
+					$post_metas[$key] = get_term_by('id', $post_metas[$key][0] , 'place');
+				}
+			}
 			return [
 				'flight' => get_post($p),
 				'terms' => $terms,
-				'meta_values' => get_post_meta($p)
+				'meta_values' => $post_metas
 			];
 		}, $posts);
 

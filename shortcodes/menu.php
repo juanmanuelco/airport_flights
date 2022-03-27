@@ -59,7 +59,7 @@ function flight_menu(){
             </div>
 
             <div style="padding-top: 25px">
-                <table>
+                <table class="flights_list_table">
                     <tr>
                         <th>
                             <h4>Aerolínea</h4>
@@ -68,6 +68,10 @@ function flight_menu(){
                         <th>
                             <h4>Vuelo</h4>
                             <p>Flight</p>
+                        </th>
+                        <th>
+                            <h4>Puerta</h4>
+                            <p>Door</p>
                         </th>
                         <th v-if="selected.name == 'arrival'">
                             <h4>Origen</h4>
@@ -86,24 +90,45 @@ function flight_menu(){
                             <p>Status</p>
                         </th>
                     </tr>
-                    <tr v-for="flight in flight_list">
-                        <th>
+                    <tr v-for="flight in flight_list" v-if="flight.terms.status[0].values['status_hidden'][0] == 'off' ">
+                        <td>
                             <img
                                     v-bind:src="flight.terms.airline[0].values.airline_image[0]"
                                     v-if="flight.terms.airline != false && flight.terms.airline[0].values.airline_image != false"
-                                    alt=""
-                                    width="200px">
-                        </th>
-                        <th>
+                                    width="100px">
+                            <span v-if="flight.terms.airline == false || flight.terms.airline[0].values.airline_image == false">
+                                {{ flight.terms.airline[0].name }}
+
+                            </span>
+                        </td>
+                        <td>
                             <p>
                                 {{flight.meta_values['_wp_flight-code_meta_key'][0]}}
                             </p>
-                        </th>
-                        <th>
+                        </td>
+                        <td>
                             <p>
-
+                                {{flight.terms.door[0].name}}
                             </p>
-                        </th>
+                        </td>
+                        <td>
+                            <p v-if="flight.meta_values['_wp_flight-destination_meta_key'] != undefined">
+                                {{flight.meta_values['_wp_flight-destination_meta_key'].name}}
+                            </p>
+                            <p v-if="flight.meta_values['_wp_flight-origin_meta_key'] != undefined">
+                                {{flight.meta_values['_wp_flight-origin_meta_key'].name}}
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                {{  getHour(flight) }}
+                            </p>
+                        </td>
+                        <td v-bind:style="{ backgroundColor : `${flight.terms.status[0].values['status_bk_color'][0]}` }">
+                            <p v-bind:style="{color: flight.terms.status[0].values['status_txt_color'][0] }">
+                                {{ flight.terms.status[0].name }}
+                            </p>
+                        </td>
                     </tr>
                 </table>
             </div>

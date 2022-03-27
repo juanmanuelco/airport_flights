@@ -18,23 +18,23 @@
             current_time : '',
             loading : false,
             flight_list : [],
-            width : window.innerWidth < 1250 ?  (window.innerWidth * 2) : window.innerWidth
+            width : window.innerWidth < 1250 ?  (window.innerWidth * 2) : window.innerWidth,
+            urlInterval : null
         },
         mounted (){
             this.getCurrentTime();
             this.getCurrentSize();
-        },
-        computed : {
-
         },
         methods :{
             setFlight :(flight)=>{
                 flight_menu.selected = flight;
             },
             changeRoute : (type)=>{
+                clearInterval(flight_menu.urlInterval);
                 flight_menu.types.forEach((t)=>{
                     t.active = false;
                 });
+                console.log(flight_menu.flight_list);
                 if(type.link === 'back') {
                     flight_menu.selected = null;
                     flight_menu.type_selected = null;
@@ -65,16 +65,25 @@
             getListData : ()=>{
                 flight_menu.loading = true;
                 let url = `<?php echo get_home_url() ?>/wp-json/v1/list/flights?route=${flight_menu.type_selected.name}&type=${flight_menu.selected.name}`;
-                console.log(url);
-                fetch(url)
-                    .then(response => response.json())
-                    .then((list)=>{
-                        flight_menu.flight_list = list;
-                        console.log(list);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
+                fetch(url).then(response => response.json()).then((list)=>{flight_menu.flight_list = list;});
+                flight_menu.urlInterval = setInterval( ()=> {
+                    fetch(url).then(response => response.json()).then((list)=>{flight_menu.flight_list = list;});
+                }, 30000);
+            },
+            getHour : (fl)=>{
+                let currentTimeDate = new Date(fl.meta_values['_wp_flight-estimate_meta_key'][0]);
+                let hours   =  currentTimeDate.getUTCHours();
+                let minutes =  currentTimeDate.getUTCMinutes();
+                let AMPM = hours >= 12 ? 'PM' : 'AM';
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+
+                let month = currentTimeDate.getMonth() + 1;
+                month = month < 10 ? `0${month}` : month;
+
+                let day = currentTimeDate.getUTCDate();
+                day = day < 10 ? `0${day}` : day;
+
+                return `${day}/${month }  - ${hours}:${minutes}${AMPM}`;
             }
         }
     });

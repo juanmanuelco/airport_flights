@@ -57,4 +57,24 @@
         background-color: var(--wp-primary);
         color: var(--wp-light);
     }
+    .flights_list_table td{
+        vertical-align: middle;
+        text-align: center;
+    }
+    .flights_list_table tr td p{
+        font-size: 1.8em;
+    }
+    .flights_list_table {
+        overflow-x: scroll;
+        display: block;
+    }
+    .flights_list_table tbody{
+        width: 100%;
+        display: inline-table;
+    }
+    .flights_list_table tr th {
+        background-color: var(--wp-secundary) !important;
+        color: var(--wp-light) !important;
+    }
+
 </style>
