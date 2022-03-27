@@ -5,6 +5,7 @@ function vue_faw_js(){
     ?>
     <script src="https://kit.fontawesome.com/728a3885a4.js" crossorigin="anonymous"></script>
     <script src="<?php echo plugins_url( '/AirportFlights/assets/js/vue.js') ?>"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
     <?php
 }
 
@@ -112,7 +113,7 @@ function flight_menu(){
                         </td>
                         <td>
                             <p>
-                                {{getStringValue(flight, "_wp_flight-code_meta_key")}}
+                                {{getStringValue(flight, `_wp_flight-code_meta_key`)}}
                             </p>
                         </td>
                         <td>
@@ -122,10 +123,10 @@ function flight_menu(){
                         </td>
                         <td>
                             <p v-if="flight.meta_values['_wp_flight-destination_meta_key'] != undefined">
-                                {{flight.meta_values['_wp_flight-destination_meta_key'].name}}
+                                {{flight.meta_values[`_wp_flight-destination_meta_key`].name}}
                             </p>
                             <p v-if="flight.meta_values['_wp_flight-origin_meta_key'] != undefined">
-                                {{flight.meta_values['_wp_flight-origin_meta_key'].name}}
+                                {{flight.meta_values[`_wp_flight-origin_meta_key`].name}}
                             </p>
                         </td>
                         <td>

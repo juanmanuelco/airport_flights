@@ -3,9 +3,6 @@ add_action('rest_api_init', function () {
 	register_rest_route('v1', '/list/flights', array(
 		'methods' => \WP_REST_Server::READABLE,
 		'callback' => 'flightList',
-		'args' => [
-			'type'
-		],
 	));
 });
 function flightList(WP_REST_Request $request){

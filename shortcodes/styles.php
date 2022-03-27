@@ -36,15 +36,15 @@
         justify-content: center;
     }
 
-    .flight-list {
-        padding-top: 25px;
-    }
-
     .menu-flight .button-flight {
         border-radius: 15px;
         border: 3px solid var(--wp-primary);
         padding-bottom: 25px;
         margin: 5px;
+    }
+
+    #flight_menu{
+        max-width: 100% !important;
     }
 
     #flight_menu .menu-flight a {
@@ -62,7 +62,7 @@
         text-align: center;
     }
     .flights_list_table tr td p{
-        font-size: 1.6em;
+        font-size: 1.4em;
     }
     .flights_list_table {
         overflow-x: scroll;
