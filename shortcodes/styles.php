@@ -92,4 +92,8 @@
         100% { transform: rotate(360deg); }
     }
 
+    .p-title{
+        font-size: 25px;
+    }
+
 </style>

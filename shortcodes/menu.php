@@ -59,7 +59,7 @@ function flight_menu(){
 
                 </div>
                 <div style="padding-top: 15px">
-                    <h3><strong>{{current_time}}</strong></h3>
+                    <p class="p-title"><strong>{{current_time}}</strong></p>
                 </div>
             </div>
 
@@ -72,31 +72,31 @@ function flight_menu(){
                 <table class="flights_list_table">
                     <tr>
                         <th>
-                            <h4>Aerolínea</h4>
+                            <p class="p-title">Aerolínea</p>
                             <p>Airline</p>
                         </th>
                         <th>
-                            <h4>Vuelo</h4>
+                            <p class="p-title">Vuelo</p>
                             <p>Flight</p>
                         </th>
                         <th>
-                            <h4>Puerta</h4>
+                            <p class="p-title">Puerta</p>
                             <p>Door</p>
                         </th>
                         <th v-if="flight_selected.name == 'arrival'">
-                            <h4>Origen</h4>
+                            <p class="p-title">Origen</p>
                             <p>Origin</p>
                         </th>
                         <th v-if="flight_selected.name == 'departure'">
-                            <h4>Destino</h4>
+                            <p class="p-title">Destino</p>
                             <p>Destination</p>
                         </th>
                         <th>
-                            <h4>Hora de {{flight_selected.label}}</h4>
+                            <p class="p-title">Hora de {{flight_selected.label}}</p>
                             <p>Time of {{flight_selected.name}}</p>
                         </th>
                         <th>
-                            <h4>Estado</h4>
+                            <p class="p-title">Estado</p>
                             <p>Status</p>
                         </th>
                     </tr>

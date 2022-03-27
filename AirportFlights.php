@@ -42,9 +42,7 @@ include_once ('shortcodes/menu.php');
 include_once ('api/flights.php');
 
 
-add_action('plugins_loaded', 'air_plugin_init');
-
-function air_plugin_init() {
-	load_plugin_textdomain( 'airport_flights', false, dirname(plugin_basename(__FILE__)).'/languages/' );
-
+function lang_init() {
+	load_plugin_textdomain( 'airport_flights', false,  dirname( plugin_basename( __FILE__ ) ) . '/languages'  );
 }
+add_action( 'init', 'lang_init' );
