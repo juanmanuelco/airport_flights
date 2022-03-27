@@ -15,7 +15,7 @@ function flight_menu(){
 	?>
 	<div id="flight_menu" >
         <div class="menu-flight" v-if="show_menu">
-            <div v-for="flight in flights" v-if="selected == null">
+            <div v-for="flight in flights" v-if="flight_selected == null">
                 <div
                         style="text-align: center"
                         class="button-flight"
@@ -26,7 +26,7 @@ function flight_menu(){
                     <i v-bind:class="flight.icon + ' fa-2xl'"></i>
                 </div>
             </div>
-            <div v-for="type in types" v-if="selected != null">
+            <div v-for="type in routes" v-if="flight_selected != null">
                 <div
                         style="text-align: center"
                         v-bind:class="'button-flight ' + (type.active ? 'button-flight-active' : '')"
@@ -37,19 +37,23 @@ function flight_menu(){
                     <i v-bind:class="type.icon + ' fa-2xl'"></i>
                 </div>
             </div>
+
         </div>
-        <div class="flight-list" v-if="selected != null && type_selected != null">
+        <div class="flight-list" v-if="flight_selected != null && route_selected != null">
             <div style="display: flex; justify-content: space-around">
                 <div class="list-title">
+                    <div class="icon-type" v-on:click="todayList" style="cursor: pointer; background-color: var(--wp-primary)">
+                        <i v-bind:class="'fa-solid ' +  (today ? 'fa-circle-plus' : 'fa-circle-minus') + ' fa-2xl'"></i>
+                    </div>
                     <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)">
                         <i v-bind:class="'fa-solid ' +  (show_menu ? 'fa-eye-slash' : 'fa-eye') + ' fa-2xl'"></i>
                     </div>
                     <div class="icon-type" >
-                        <i v-bind:class="selected.icon + ' fa-2xl'"></i>
+                        <i v-bind:class="flight_selected.icon + ' fa-2xl'"></i>
                     </div>
                     <div style="display: inline-block;">
-                        <strong>{{selected.label}} {{type_selected.label}}</strong>
-                        <div>{{type_selected.name}} {{selected.name}} </div>
+                        <strong>{{flight_selected.label}} {{route_selected.label}}</strong>
+                        <div>{{route_selected.name}} {{flight_selected.name}} </div>
                     </div>
 
                 </div>
@@ -58,7 +62,12 @@ function flight_menu(){
                 </div>
             </div>
 
-            <div style="padding-top: 25px">
+            <div v-if="loading" style="text-align: center">
+                <div class="loader" ></div>
+            </div>
+
+
+            <div style="padding-top: 25px" v-if="!loading">
                 <table class="flights_list_table">
                     <tr>
                         <th>
@@ -73,17 +82,17 @@ function flight_menu(){
                             <h4>Puerta</h4>
                             <p>Door</p>
                         </th>
-                        <th v-if="selected.name == 'arrival'">
+                        <th v-if="flight_selected.name == 'arrival'">
                             <h4>Origen</h4>
                             <p>Origin</p>
                         </th>
-                        <th v-if="selected.name == 'departure'">
+                        <th v-if="flight_selected.name == 'departure'">
                             <h4>Destino</h4>
                             <p>Destination</p>
                         </th>
                         <th>
-                            <h4>Hora de {{selected.label}}</h4>
-                            <p>Time of {{selected.name}}</p>
+                            <h4>Hora de {{flight_selected.label}}</h4>
+                            <p>Time of {{flight_selected.name}}</p>
                         </th>
                         <th>
                             <h4>Estado</h4>
@@ -95,7 +104,7 @@ function flight_menu(){
                             <img
                                     v-bind:src="flight.terms.airline[0].values.airline_image[0]"
                                     v-if="flight.terms.airline != false && flight.terms.airline[0].values.airline_image != false"
-                                    width="100px">
+                                    style="height: 100px;">
                             <span v-if="flight.terms.airline == false || flight.terms.airline[0].values.airline_image == false">
                                 {{ flight.terms.airline[0].name }}
 
@@ -126,7 +135,7 @@ function flight_menu(){
                         </td>
                         <td v-bind:style="{ backgroundColor : `${flight.terms.status[0].values['status_bk_color'][0]}` }">
                             <p v-bind:style="{color: flight.terms.status[0].values['status_txt_color'][0] }">
-                                {{ flight.terms.status[0].name }}
+                                <strong>{{ flight.terms.status[0].name }}</strong>
                             </p>
                         </td>
                     </tr>
