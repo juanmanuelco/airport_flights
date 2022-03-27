@@ -1,16 +1,16 @@
 <?php ?>
-<script>
+<script charset="utf-8"  type="text/javascript">
     let flight_menu = new Vue({
         el: '#flight_menu',
         data: {
             flights : [
-                { name : 'arrival', label : '<?php echo __('Arrival') ?>', icon : 'fa-solid fa-plane-arrival' },
-                { name : 'departure', label : '<?php echo __('Departure') ?>', icon : 'fa-solid fa-plane-departure' }
+                { name : 'arrival', label : '<?php echo __('Arrival', 'airport_flights') ?>', icon : 'fa-solid fa-plane-arrival' },
+                { name : 'departure', label : '<?php echo __('Departure', 'airport_flights') ?>', icon : 'fa-solid fa-plane-departure' }
             ],
             routes : [
-                { name : 'back', label : '<?php echo __('Back') ?>', icon : 'fa-solid fa-rotate-left' , link : 'back', active : false},
-                { name : 'national', label : '<?php echo __('National') ?>', icon : 'fa-solid fa-flag' , link : '', active : false},
-                { name : 'international', label : '<?php echo __('International') ?>', icon : 'fa-solid fa-globe' , link : '', active : false},
+                { name : 'back', label : '<?php echo __('Back', 'airport_flights') ?>', icon : 'fa-solid fa-rotate-left' , link : 'back', active : false},
+                { name : 'national', label : '<?php echo __('National', 'airport_flights') ?>', icon : 'fa-solid fa-flag' , link : '', active : false},
+                { name : 'international', label : '<?php echo __('International', 'airport_flights') ?>', icon : 'fa-solid fa-globe' , link : '', active : false},
             ],
             flight_selected: null,
             route_selected : null,
@@ -115,6 +115,9 @@
 
                 let dd = `${day}/${month }  - ${hours}:${minutes}${AMPM}`;
                 return dd;
+            },
+            getStringValue : (fl, attribute)=>{
+                return fl.meta_values[attribute][0]
             }
         }
     });

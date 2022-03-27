@@ -15,12 +15,12 @@
                 flight_origin : '<?php echo $flight_origin ?>',
                 flight_destination : '<?php echo $flight_destination ?>',
                 flight_types : [
-                    {'value' : 'arrival', 'label' : '<?php echo __('Arrivals') ?>' },
-                    {'value' : 'departure', 'label' : '<?php echo __('Departures') ?>' },
+                    {'value' : 'arrival', 'label' : '<?php echo __('Arrivals', 'airport_flights') ?>' },
+                    {'value' : 'departure', 'label' : '<?php echo __('Departures', 'airport_flights') ?>' },
                 ],
                 flight_routes : [
-                    {'value' : 'national', 'label' : '<?php echo __('National') ?>' },
-                    {'value' : 'international', 'label' : '<?php echo __('International') ?>' },
+                    {'value' : 'national', 'label' : '<?php echo __('National', 'airport_flights') ?>' },
+                    {'value' : 'international', 'label' : '<?php echo __('International', 'airport_flights') ?>' },
                 ],
                 places : <?php echo json_encode($places); ?>,
                 search : ''
@@ -30,10 +30,10 @@
                     let response = "";
                     switch (flight_app.flight_type){
                         case 'arrival':
-                            response =  '<?php echo __('Arrival') ?>';
+                            response =  '<?php echo __('Arrival', 'airport_flights') ?>';
                             break
 	                    case 'departure':
-                            response =  '<?php echo __('Departure') ?>';
+                            response =  '<?php echo __('Departure', 'airport_flights') ?>';
                             break
                     }
                     return response;

@@ -11,7 +11,7 @@ function flight_plugin_active() {
 		'edit_posts'   => true,
 		'upload_files' => true,
 	];
-	add_role( 'flights_manager', __('Flights manager'), $caps );
+	add_role( 'flights_manager', __('Flights manager', 'airport_flights'), $caps );
 }
 
 function flight_plugin_deactivate() {
@@ -20,9 +20,11 @@ function flight_plugin_deactivate() {
 
 add_action('admin_init','add_role_custom_caps');
 function add_role_custom_caps() {
+	flight_plugin_active();
 	$roles = array('flights_manager', 'administrator');
 	foreach($roles as $the_role) {
 		$role = get_role($the_role);
+		if($role == null) continue;
 		$role->add_cap( 'read' );
 		$role->add_cap( 'read_flights');
 		$role->add_cap( 'read_private_flights' );

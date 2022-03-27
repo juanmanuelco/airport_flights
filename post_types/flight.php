@@ -4,17 +4,17 @@ function flightPostType(){
 	register_post_type( 'flight',
 		array(
 			'labels'       => array(
-				'name'               => __( 'Flights' ),
-				'singular_name'      => __( 'Flight' ),
-				'add_new'            => __( 'Add New flight' ),
-				'add_new_item'       => __( 'Add New flight' ),
-				'edit_item'          => __( 'Edit Flight' ),
-				'new_item'           => __( 'New Flight' ),
-				'all_items'          => __( 'All Flights' ),
-				'view_item'          => __( 'View Flights' ),
-				'search_items'       => __( 'Search Flights' ),
-				'not_found'          => __( 'No flights found' ),
-				'not_found_in_trash' => __( 'No flights found in the Trash' ),
+				'name'               => __( 'Flights', 'airport_flights' ),
+				'singular_name'      => __( 'Flight' , 'airport_flights' ),
+				'add_new'            => __( 'Add New flight', 'airport_flights' ),
+				'add_new_item'       => __( 'Add New flight', 'airport_flights' ),
+				'edit_item'          => __( 'Edit Flight', 'airport_flights' ),
+				'new_item'           => __( 'New Flight' , 'airport_flights'),
+				'all_items'          => __( 'All Flights', 'airport_flights' ),
+				'view_item'          => __( 'View Flights', 'airport_flights' ),
+				'search_items'       => __( 'Search Flights', 'airport_flights' ),
+				'not_found'          => __( 'No flights found', 'airport_flights' ),
+				'not_found_in_trash' => __( 'No flights found in the Trash', 'airport_flights' ),
 				'menu_name'          => 'Flights'
 			),
 			'public'              => true,
@@ -33,7 +33,7 @@ add_action('init', 'flightPostType');
 function flightCustomFields() {
 	add_meta_box(
 		'wp_flight_type',
-		__('Flight details'),
+		__('Flight details', 'airport_flights'),
 		'wp_flight_type_callback',
 		'flight'
 	);
@@ -60,37 +60,37 @@ function wp_flight_type_callback($post){
 
         <div style="display: flex; justify-content: space-between " id="flight_app">
             <div>
-                <h3><?php echo __('Flight type', 'Flight type') ?></h3>
+                <h3><?php echo __('Flight type', 'airport_flights') ?></h3>
                 <select required name="flight_type" v-model="flight_type">
                     <option v-for="type in flight_types" v-bind:value="type.value">{{type.label}}</option>
                 </select>
             </div>
             <div>
-                <h3><?php echo __('Flight route', 'Flight route') ?></h3>
+                <h3><?php echo __('Flight route', 'airport_flights') ?></h3>
                 <select required name="flight_route" v-model="flight_route">
                     <option v-for="route in flight_routes" v-bind:value="route.value">{{route.label}}</option>
                 </select>
             </div>
             <div>
-                <h3><?php echo __('Flight code', 'Flight code') ?></h3>
+                <h3><?php echo __('Flight code', 'airport_flights') ?></h3>
                 <input type="text" required name="flight_code" minlength="1" maxlength="100" v-model="flight_code" >
             </div>
             <div>
-                <h3><?php echo __('Estimate', 'Estimate') ?></h3>
+                <h3><?php echo __('Estimate', 'airport_flights') ?></h3>
                 <input type="datetime-local" required name="flight_estimate" v-model="flight_estimate">
             </div>
             <div v-if="flight_type == 'arrival'">
-                <h3><?php echo __('Origin', 'Origin') ?></h3>
-                <input type="search" v-model="search" placeholder="<?php echo __('Search') ?>..." v-on:keyup="filter()">
+                <h3><?php echo __('Origin', 'airport_flights') ?></h3>
+                <input type="search" v-model="search" placeholder="<?php echo __('Search', 'airport_flights') ?>..." v-on:keyup="filter()">
                 <hr>
                 <select required name="flight_origin" v-model="flight_origin">
                     <option v-if="place.visible"  v-for="place in places" v-bind:value="place.id">{{place.name}}</option>
                 </select>
             </div>
             <div v-if="flight_type == 'departure'">
-                <h3><?php echo __('Destination', 'Destination') ?></h3>
+                <h3><?php echo __('Destination', 'airport_flights') ?></h3>
                 <div>
-                    <input type="search" v-model="search" placeholder="<?php echo __('Search') ?>..." v-on:keyup="filter()">
+                    <input type="search" v-model="search" placeholder="<?php echo __('Search', 'airport_flights') ?>..." v-on:keyup="filter()">
                     <hr>
                 </div>
                 <select required name="flight_destination" v-model="flight_destination">

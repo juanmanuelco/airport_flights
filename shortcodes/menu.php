@@ -112,7 +112,7 @@ function flight_menu(){
                         </td>
                         <td>
                             <p>
-                                {{flight.meta_values['_wp_flight-code_meta_key'][0]}}
+                                {{getStringValue(flight, "_wp_flight-code_meta_key")}}
                             </p>
                         </td>
                         <td>
