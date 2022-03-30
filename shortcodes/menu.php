@@ -11,11 +11,17 @@ function vue_faw_js(){
 
 add_shortcode('flight_menu', 'flight_menu');
 
-function flight_menu(){
+function flight_menu($attr){
+	$attr = shortcode_atts( array(
+		'type' => 'a',
+        'route' => 'n',
+        'interval' => 30000,
+        'menu' => 1
+	), $attr );
 	ob_start();
 	?>
 	<div id="flight_menu" >
-        <div class="menu-flight" v-if="show_menu">
+        <div class="menu-flight" v-if="show_menu && show_all == 1">
             <div v-for="flight in flights" v-if="flight_selected == null">
                 <div
                         style="text-align: center"
@@ -43,10 +49,10 @@ function flight_menu(){
         <div class="flight-list" v-if="flight_selected != null && route_selected != null">
             <div style="display: flex; justify-content: space-around">
                 <div class="list-title">
-                    <div class="icon-type" v-on:click="todayList" style="cursor: pointer; background-color: var(--wp-primary)">
+                    <div class="icon-type" v-on:click="todayList" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
                         <i v-bind:class="'fa-solid ' +  (today ? 'fa-circle-plus' : 'fa-circle-minus') + ' fa-2xl'"></i>
                     </div>
-                    <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)">
+                    <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
                         <i v-bind:class="'fa-solid ' +  (show_menu ? 'fa-eye-slash' : 'fa-eye') + ' fa-2xl'"></i>
                     </div>
                     <div class="icon-type" >

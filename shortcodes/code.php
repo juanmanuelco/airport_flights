@@ -20,13 +20,24 @@
             flight_list : [],
             width : window.innerWidth < 1250 ?  (window.innerWidth * 2) : window.innerWidth,
             urlInterval : null,
-            today : true
+            today : true,
+            show_all : <?php echo $attr['menu'] ?>
         },
         mounted (){
             this.getCurrentTime();
             this.getCurrentSize();
+            this.setCurrentFlights();
         },
         methods :{
+            setCurrentFlights : ()=>{
+                let type = '<?php echo $attr['type'] ?>';
+                let route = '<?php echo $attr['route'] ?>';
+                jQuery( document ).ready(()=>{
+                    flight_menu.flight_selected = type === 'd' ? flight_menu.flights[1] : flight_menu.flights[0];
+                    flight_menu.route_selected = route === 'i' ? flight_menu.routes[2] : flight_menu.routes[1];
+                    flight_menu.getListData();
+                })
+            },
             setFlight :(flight)=>{
                 flight_menu.flight_selected = flight;
             },
