@@ -30,12 +30,14 @@
         },
         methods :{
             setCurrentFlights : ()=>{
-                let type = '<?php echo $attr['type'] ?>';
-                let route = '<?php echo $attr['route'] ?>';
                 jQuery( document ).ready(()=>{
-                    flight_menu.flight_selected = type === 'd' ? flight_menu.flights[1] : flight_menu.flights[0];
-                    flight_menu.route_selected = route === 'i' ? flight_menu.routes[2] : flight_menu.routes[1];
-                    flight_menu.getListData();
+                    if(flight_menu.show_all === 0){
+                        let type = '<?php echo $attr['type'] ?>';
+                        let route = '<?php echo $attr['route'] ?>';
+                        flight_menu.flight_selected = type === 'd' ? flight_menu.flights[1] : flight_menu.flights[0];
+                        flight_menu.route_selected = route === 'i' ? flight_menu.routes[2] : flight_menu.routes[1];
+                        flight_menu.getListData();
+                    }
                 })
             },
             setFlight :(flight)=>{
@@ -124,8 +126,7 @@
                 let day = currentTimeDate.getDate();
                 day = day < 10 ? `0${day}` : day;
 
-                let dd = `${day}/${month }  - ${hours}:${minutes}${AMPM}`;
-                return dd;
+                return `${day}/${month}  - ${hours}:${minutes}${AMPM}`;
             },
             getStringValue : (fl, attribute)=>{
                 return fl.meta_values[attribute][0]
