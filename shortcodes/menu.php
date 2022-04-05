@@ -15,7 +15,7 @@ function flight_menu($attr){
 	$attr = shortcode_atts( array(
 		'type' => 'a',
         'route' => 'n',
-        'interval' => 30000,
+        'interval' => 12,
         'menu' => 1
 	), $attr );
 	ob_start();
@@ -50,7 +50,7 @@ function flight_menu($attr){
             <div style="display: flex; justify-content: space-around">
                 <div class="list-title">
                     <div class="icon-type" v-on:click="todayList" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
-                        <i v-bind:class="'fa-solid ' +  (today ? 'fa-circle-plus' : 'fa-circle-minus') + ' fa-2xl'"></i>
+                        <i v-bind:class="'fa-solid ' +  (dateToShow ? 'fa-circle-plus' : 'fa-circle-minus') + ' fa-2xl'"></i>
                     </div>
                     <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
                         <i v-bind:class="'fa-solid ' +  (show_menu ? 'fa-eye-slash' : 'fa-eye') + ' fa-2xl'"></i>
@@ -78,32 +78,32 @@ function flight_menu($attr){
                 <table class="flights_list_table">
                     <tr>
                         <th>
-                            <p class="p-title">Aerolínea</p>
-                            <p>Airline</p>
+                            <p class="p-title">{{titles.airline[index_title]}}</p>
+                            <p>{{ titles.airline[index_subtitle] }}</p>
                         </th>
                         <th>
-                            <p class="p-title">Vuelo</p>
-                            <p>Flight</p>
+                            <p class="p-title">{{titles.flight[index_title]}}</p>
+                            <p>{{ titles.flight[index_subtitle] }}</p>
                         </th>
                         <th>
-                            <p class="p-title">Puerta</p>
-                            <p>Door</p>
+                            <p class="p-title">{{ titles.door[index_title] }}</p>
+                            <p>{{ titles.door[index_subtitle] }}</p>
                         </th>
                         <th v-if="flight_selected.name == 'arrival'">
-                            <p class="p-title">Origen</p>
-                            <p>Origin</p>
+                            <p class="p-title">{{ titles.origin[index_title] }}</p>
+                            <p>{{ titles.origin[index_subtitle] }}</p>
                         </th>
                         <th v-if="flight_selected.name == 'departure'">
-                            <p class="p-title">Destino</p>
-                            <p>Destination</p>
+                            <p class="p-title">{{ titles.destination[index_title] }}</p>
+                            <p>{{ titles.destination[index_subtitle] }}</p>
                         </th>
                         <th>
-                            <p class="p-title">Hora de {{flight_selected.label}}</p>
-                            <p>Time of {{flight_selected.name}}</p>
+                            <p class="p-title">{{ titles.estimate[index_title] }}</p>
+                            <p>{{ titles.estimate[index_subtitle] }}</p>
                         </th>
                         <th>
-                            <p class="p-title">Estado</p>
-                            <p>Status</p>
+                            <p class="p-title">{{ titles.status[index_title] }}</p>
+                            <p>{{ titles.status[index_subtitle] }}</p>
                         </th>
                     </tr>
                     <tr v-for="flight in flight_list" v-if="flight.terms.status[0].values['status_hidden'][0] == 'off' ">
@@ -143,6 +143,8 @@ function flight_menu($attr){
                         <td v-bind:style="{ backgroundColor : `${flight.terms.status[0].values['status_bk_color'][0]}` }">
                             <p v-bind:style="{color: flight.terms.status[0].values['status_txt_color'][0] }">
                                 <strong>{{ flight.terms.status[0].name }}</strong>
+                                <br>
+                                <strong>{{ flight.terms.status[0].values['english_name_txt'][0] }}</strong>
                             </p>
                         </td>
                     </tr>

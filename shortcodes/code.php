@@ -3,6 +3,15 @@
     let flight_menu = new Vue({
         el: '#flight_menu',
         data: {
+            titles : {
+                airline:        ['Airline', 'Aerolínea'],
+                flight:         ['Flight', 'Vuelo'],
+                door:           ['Door', 'Puerta' ],
+                origin :        ['Origin', 'Origen'],
+                destination :   ['Destination', 'Destino'],
+                estimate :      ['Time of departure', 'Hora de salida'],
+                status :        ['Status', 'Estado']
+            },
             flights : [
                 { name : 'arrival', label : '<?php echo __('Arrival', 'airport_flights') ?>', icon : 'fa-solid fa-plane-arrival' },
                 { name : 'departure', label : '<?php echo __('Departure', 'airport_flights') ?>', icon : 'fa-solid fa-plane-departure' }
@@ -20,8 +29,11 @@
             flight_list : [],
             width : window.innerWidth < 1250 ?  (window.innerWidth * 2) : window.innerWidth,
             urlInterval : null,
-            today : true,
-            show_all : <?php echo $attr['menu'] ?>
+            dateToShow : true,
+            show_all : <?php echo $attr['menu'] ?>,
+            index_title : 0,
+            index_subtitle : 1,
+            interval : <?php echo $attr['interval'] ?> * 3600000
         },
         mounted (){
             this.getCurrentTime();
@@ -44,7 +56,7 @@
                 flight_menu.flight_selected = flight;
             },
             todayList : ()=>{
-                flight_menu.today = !flight_menu.today;
+                flight_menu.dateToShow = !flight_menu.dateToShow;
                 flight_menu.getListData();
             },
             changeRoute : (type)=>{
@@ -88,23 +100,22 @@
                 clearInterval(flight_menu.urlInterval);
                 flight_menu.urlInterval = setInterval( (uri)=> {
                     flight_menu.urlListData(uri);
+                    flight_menu.index_title = flight_menu.index_title === 0 ? 1: 0;
+                    flight_menu.index_subtitle = flight_menu.index_subtitle === 0 ? 1: 0;
                 }, 30000, url);
             },
             urlListData : (url)=>{
-                console.log(url);
                 fetch(url).then(response => response.json()).then((list)=>{
                     list.sort((a, b)=>{
                         let _a = new Date(a.meta_values['_wp_flight-estimate_meta_key'][0]);
                         let _b = new Date(b.meta_values['_wp_flight-estimate_meta_key'][0]);
                         return _b - _a;
                     });
-                    if(flight_menu.today){
+                    if(flight_menu.dateToShow){
                         list = list.filter((fl)=>{
-                            let currentTime = new Date();
-                            let flightTimeDate = new Date(fl.meta_values['_wp_flight-estimate_meta_key'][0]);
-                            return  currentTime.getDate() === flightTimeDate.getDate() &&
-                                currentTime.getMonth() === flightTimeDate.getMonth() &&
-                                currentTime.getFullYear() === flightTimeDate.getFullYear();
+                            let currentTime = new Date().getTime();
+                            let flightTimeDate = new Date(fl.meta_values['_wp_flight-estimate_meta_key'][0]).getTime();
+                            return  flightTimeDate <= (currentTime + flight_menu.interval) && flightTimeDate >=  (currentTime - flight_menu.interval);
                         });
                     }
                     flight_menu.flight_list = list;

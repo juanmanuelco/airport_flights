@@ -37,6 +37,13 @@ add_action( 'init', function () {
 
 function status_add_custom_field() {
 	?>
+
+    <div class="form-field">
+        <label for="english_name_txt"><?php _e( 'English name' ); ?></label>
+        <input type="text" name="english_name_txt" id="english_name_txt">
+    </div>
+
+
     <div class="form-field">
         <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
         <input type="checkbox" name="status_hidden" id="status_hidden" >
@@ -57,17 +64,26 @@ add_action( 'status_add_form_fields', 'status_add_custom_field', 10, 2 );
 
 
 function status_edit_custom_field($term) {
+	$english_name = get_term_meta($term->term_id, 'english_name_txt', true);
 	$bk_color = get_term_meta($term->term_id, 'status_bk_color', true);
 	$txt_color = get_term_meta($term->term_id, 'status_txt_color', true);
 	$status_hidden = get_term_meta($term->term_id, 'status_hidden', true);
 	?>
+    <tr class="form-field term-english_name-wrap">
+        <th scope="row">
+            <label for="english_name_txt"><?php _e( 'English name' ); ?></label>
+        </th>
+        <td>
+            <input type="text" name="english_name_txt" id="english_name_txt" value="<?php echo $english_name ?>" >
+        </td>
+    </tr>
 
     <tr class="form-field term-bk_color-wrap">
         <th scope="row">
             <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
         </th>
         <td>
-            <input type="checkbox" name="status_hidden" id="status_hidden" <?php echo $status_hidden? 'checked' : '' ;  ?> >
+            <input type="checkbox" name="status_hidden" id="status_hidden" <?php echo $status_hidden == 'on'? 'checked' : '' ;  ?> >
         </td>
     </tr>
 
@@ -82,7 +98,7 @@ function status_edit_custom_field($term) {
 
 	<tr class="form-field term-txt_color-wrap">
 		<th scope="row">
-			<label for="status_bk_color"><?php _e( 'Text color' ); ?></label>
+			<label for="status_txt_color"><?php _e( 'Text color' ); ?></label>
 		</th>
 		<td>
 			<input type="color" name="status_txt_color" id="status_txt_color" value="<?php echo $txt_color ?>">
@@ -99,6 +115,14 @@ function save_taxonomy_status_meta_field( $term_id ) {
     }else{
 		update_term_meta($term_id, 'status_bk_color', '#ffffff');
     }
+
+	if ( isset( $_POST['english_name_txt'] )  && !empty( $_POST['english_name_txt'])) {
+		update_term_meta($term_id, 'english_name_txt', $_POST['english_name_txt']);
+	}else{
+		update_term_meta($term_id, 'english_name_txt', $_POST['name']);
+	}
+
+
 	if ( isset( $_POST['status_txt_color'] ) ) {
 		update_term_meta($term_id, 'status_txt_color', $_POST['status_txt_color']);
     }else{
