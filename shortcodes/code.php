@@ -115,7 +115,8 @@
                         list = list.filter((fl)=>{
                             let currentTime = new Date().getTime();
                             let flightTimeDate = new Date(fl.meta_values['_wp_flight-estimate_meta_key'][0]).getTime();
-                            return  flightTimeDate <= (currentTime + flight_menu.interval) && flightTimeDate >=  (currentTime - flight_menu.interval);
+                            let hh = (flightTimeDate <= (currentTime + flight_menu.interval)) === (flightTimeDate >=  (currentTime - flight_menu.interval));
+                            return  hh;
                         });
                     }
                     flight_menu.flight_list = list;
