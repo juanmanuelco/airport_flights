@@ -144,7 +144,7 @@ function flight_menu($attr){
                             <p v-bind:style="{color: flight.terms.status[0].values['status_txt_color'][0] }">
                                 <strong>{{ flight.terms.status[0].name }}</strong>
                                 <br>
-                                <strong>{{ flight.terms.status[0].values['english_name_txt'][0] }}</strong>
+                                <strong>{{ flight.terms.status[0].values[`english_name_txt`][0] }}</strong>
                             </p>
                         </td>
                     </tr>
