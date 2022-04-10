@@ -49,9 +49,6 @@ function flight_menu($attr){
         <div class="flight-list" v-if="flight_selected != null && route_selected != null">
             <div style="display: flex; justify-content: space-around">
                 <div class="list-title">
-                    <div class="icon-type" v-on:click="todayList" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
-                        <i v-bind:class="'fa-solid ' +  (dateToShow ? 'fa-circle-plus' : 'fa-circle-minus') + ' fa-2xl'"></i>
-                    </div>
                     <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
                         <i v-bind:class="'fa-solid ' +  (show_menu ? 'fa-eye-slash' : 'fa-eye') + ' fa-2xl'"></i>
                     </div>

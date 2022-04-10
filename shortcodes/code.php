@@ -33,7 +33,7 @@
             show_all : <?php echo $attr['menu'] ?>,
             index_title : 0,
             index_subtitle : 1,
-            interval : <?php echo $attr['interval'] ?> * 3600000
+            interval : <?php echo $attr['interval'] ?>
         },
         mounted (){
             this.getCurrentTime();
@@ -102,23 +102,20 @@
                     flight_menu.urlListData(uri);
                     flight_menu.index_title = flight_menu.index_title === 0 ? 1: 0;
                     flight_menu.index_subtitle = flight_menu.index_subtitle === 0 ? 1: 0;
-                }, 30000, url);
+                }, 3000000, url); //Quitar 2 ceros
             },
             urlListData : (url)=>{
+                url= new URL(url);
+                url.searchParams.append('current', flight_menu.getDateString());
+                url.searchParams.append('interval', flight_menu.interval);
+
                 fetch(url).then(response => response.json()).then((list)=>{
+                    console.log(list)
                     list.sort((a, b)=>{
                         let _a = new Date(a.meta_values['_wp_flight-estimate_meta_key'][0]);
                         let _b = new Date(b.meta_values['_wp_flight-estimate_meta_key'][0]);
                         return _b - _a;
                     });
-                    if(flight_menu.dateToShow){
-                        list = list.filter((fl)=>{
-                            let currentTime = new Date().getTime();
-                            let flightTimeDate = new Date(fl.meta_values['_wp_flight-estimate_meta_key'][0]).getTime();
-                            let hh = (flightTimeDate <= (currentTime + flight_menu.interval)) === (flightTimeDate >=  (currentTime - flight_menu.interval));
-                            return  hh;
-                        });
-                    }
                     flight_menu.flight_list = list;
                 }).finally(()=>{
                     flight_menu.loading = false;
@@ -142,6 +139,21 @@
             },
             getStringValue : (fl, attribute)=>{
                 return fl.meta_values[attribute][0]
+            },
+            getDateString : ()=>{
+                let currentTime = new Date();
+                let month = currentTime.getMonth() + 1;
+                month = month < 10 ? `0${month}` : month;
+
+                let day = currentTime.getDate();
+                day = day < 10 ? `0${day}` : day;
+
+                let hour = currentTime.getHours();
+                hour = hour < 10 ? `0${hour}` : hour;
+
+                let minutes = currentTime.getMinutes();
+                minutes = minutes < 10 ? `0${minutes}` : minutes;
+                return `${currentTime.getFullYear()}-${month}-${day} ${hour}:${minutes}`;
             }
         }
     });
