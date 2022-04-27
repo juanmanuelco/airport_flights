@@ -21,13 +21,13 @@ add_action('admin_footer', function() {
                     return false;
                 }
 
-                let $door = $('#door-all > ul');
-                if ($door.find('input:checked').length < 1) {
-                    alert('<?php echo __('Door is required', 'airport_flights') ?>');
+                let $gate = $('#gate-all > ul');
+                if ($gate.find('input:checked').length < 1) {
+                    alert('<?php echo __('Gate is required', 'airport_flights') ?>');
                     return false;
                 }
-                if ($door.find('input:checked').length > 1) {
-                    alert('<?php echo __('Only one door can be selected ', 'airport_flights') ?>');
+                if ($gate.find('input:checked').length > 1) {
+                    alert('<?php echo __('Only one gate can be selected ', 'airport_flights') ?>');
                     return false;
                 }
 

@@ -6,7 +6,7 @@
             titles : {
                 airline:        ['Airline', 'Aerolínea'],
                 flight:         ['Flight', 'Vuelo'],
-                door:           ['Door', 'Puerta' ],
+                gate:           ['Gate', 'Puerta' ],
                 origin :        ['Origin', 'Origen'],
                 destination :   ['Destination', 'Destino'],
                 estimate :      ['Time of departure', 'Hora de salida'],

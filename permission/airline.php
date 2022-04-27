@@ -37,7 +37,7 @@ function add_role_custom_caps() {
 		$role->add_cap( 'delete_published_flights' );
 		$role->add_cap( 'manage_airlines' );
 		$role->add_cap( 'manage_places' );
-		$role->add_cap( 'manage_doors' );
+		$role->add_cap( 'manage_gates' );
 		$role->add_cap( 'manage_statuses' );
 	}
 }

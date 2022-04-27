@@ -16,7 +16,7 @@
                         <a href="<?php echo get_home_url() ?>/wp-admin/edit-tags.php?taxonomy=place&post_type=flight">Origenes/destinos</a>
                     </div>
                     <div>
-                        <a href="<?php echo get_home_url() ?>/wp-admin/edit-tags.php?taxonomy=door&post_type=flight">Puertas</a>
+                        <a href="<?php echo get_home_url() ?>/wp-admin/edit-tags.php?taxonomy=gate&post_type=flight">Puertas</a>
                     </div>
                     <div>
                         <a href="<?php echo get_home_url() ?>/wp-admin/edit-tags.php?taxonomy=status&post_type=flight">Statuses</a>

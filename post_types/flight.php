@@ -124,3 +124,13 @@ function save_flight( $post_id ) {
 }
 add_action( 'save_post', 'save_flight' );
 
+
+add_filter( 'page_row_actions', 'wpse16327_page_row_actions', 10, 2 );
+function wpse16327_page_row_actions( $actions, $post )
+{
+	if ( 'flight' == $post->post_type ) {
+        unset($actions['inline hide-if-no-js']);
+		return $actions;
+	}
+	return $actions;
+}

@@ -3,7 +3,7 @@
 /*
 Plugin Name: Airport Flights
 description: All you need for Airport flights management
-Version: 0.0.1
+Version: 0.0.2
 Author: JUAN CUÑEZ
 */
 
@@ -34,7 +34,7 @@ include_once ('panel.php');
 include_once ('post_types/flight.php');
 include_once ('taxonomies/airline.php');
 include_once( 'taxonomies/place.php' );
-include_once ('taxonomies/door.php');
+include_once( 'taxonomies/gate.php' );
 include_once ('taxonomies/status.php');
 include_once ('permission/airline.php');
 include_once ('general/footer.php');

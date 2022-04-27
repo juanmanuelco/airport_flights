@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AitportFlights\n"
 "POT-Creation-Date: 2022-03-27 09:18-0500\n"
-"PO-Revision-Date: 2022-03-27 09:19-0500\n"
+"PO-Revision-Date: 2022-04-27 12:22-0500\n"
 "Last-Translator: \n"
 "Language-Team: Umbral\n"
 "Language: es\n"
@@ -21,27 +21,27 @@ msgstr "Autogenerado"
 
 #: general/footer.php:16
 msgid "Airline is required"
-msgstr "Aerolinea es requerida"
+msgstr "Aerolínea es requerida"
 
 #: general/footer.php:20
 msgid "Only one airline can be selected "
-msgstr "Solo puedes seleccionar una aerolínea"
+msgstr "Solo "
 
 #: general/footer.php:26
-msgid "Door is required"
-msgstr "Selecciona una puerta"
+msgid "Gate is required"
+msgstr "Puerta es requerida"
 
 #: general/footer.php:30
-msgid "Only one door can be selected "
-msgstr "Solo una puerta puede ser seleccionada"
+msgid "Only one gate can be selected "
+msgstr "Solo una puerta puede ser seleccionada "
 
 #: general/footer.php:36
 msgid "Status is required"
-msgstr "El Estatus es requerido"
+msgstr "Estado es requerido"
 
 #: general/footer.php:40
 msgid "Only one status can be selected "
-msgstr "Solo un estatus puede ser seleccionado"
+msgstr "Solo un estado puede ser seleccionado "
 
 #: general/footer.php:45
 msgid "Code"
@@ -93,11 +93,11 @@ msgstr "No se encontraron vuelos"
 
 #: post_types/flight.php:17
 msgid "No flights found in the Trash"
-msgstr "No se encontraron vuelos eliminados"
+msgstr "No se encontraron vuelos en la zona de reciclaje"
 
 #: post_types/flight.php:36
 msgid "Flight details"
-msgstr "Detalles del vuelo"
+msgstr "Detalles de vuelo"
 
 #: post_types/flight.php:63
 msgid "Flight type"
@@ -105,11 +105,11 @@ msgstr "Tipo de vuelo"
 
 #: post_types/flight.php:69
 msgid "Flight route"
-msgstr "Ruta de vuelo"
+msgstr "Ruta del vuelo"
 
 #: post_types/flight.php:75
 msgid "Flight code"
-msgstr "Código de vuelo"
+msgstr "Código del vuelo"
 
 #: post_types/flight.php:79
 msgid "Estimate"
@@ -153,7 +153,7 @@ msgstr "Salida"
 
 #: shortcodes/code.php:11
 msgid "Back"
-msgstr "Volver"
+msgstr "Regresar"
 
 #: taxonomies/airline.php:8
 msgid "Airline"
@@ -169,7 +169,7 @@ msgstr "Aerolíneas populares"
 
 #: taxonomies/airline.php:11
 msgid "All Airlines"
-msgstr "Todas las aerolíneas"
+msgstr "Todas las erolíneas"
 
 #: taxonomies/airline.php:14
 msgid "Edit Airline"
@@ -177,7 +177,7 @@ msgstr "Editar aerolínea"
 
 #: taxonomies/airline.php:15
 msgid "Update Airline"
-msgstr "actualizar aerolínea"
+msgstr "Actualizar aerolínea"
 
 #: taxonomies/airline.php:16
 msgid "Add New Airline"
@@ -185,7 +185,7 @@ msgstr "Añadir nueva aerolínea"
 
 #: taxonomies/airline.php:17
 msgid "New Airline Name"
-msgstr "Nombre de nueva aerolínea"
+msgstr "Nuevo nombre de aerolínea"
 
 #: taxonomies/airline.php:18
 msgid "Separate Airlines with commas"
@@ -211,52 +211,52 @@ msgstr "Imágen"
 msgid "Upload Image"
 msgstr "Subir imágen"
 
-#: taxonomies/door.php:7 taxonomies/door.php:21
-msgid "Doors"
+#: taxonomies/gate.php:7 taxonomies/gate.php:21
+msgid "Gates"
 msgstr "Puertas"
 
-#: taxonomies/door.php:8
-msgid "Door"
+#: taxonomies/gate.php:8
+msgid "Gate"
 msgstr "Puerta"
 
-#: taxonomies/door.php:9
-msgid "Search doors"
+#: taxonomies/gate.php:9
+msgid "Search gates"
 msgstr "Buscar puertas"
 
-#: taxonomies/door.php:10
-msgid "Popular doors"
+#: taxonomies/gate.php:10
+msgid "Popular gates"
 msgstr "Puertas populares"
 
-#: taxonomies/door.php:11
-msgid "All doors"
+#: taxonomies/gate.php:11
+msgid "All gates"
 msgstr "Todas las puertas"
 
-#: taxonomies/door.php:14
-msgid "Edit door"
+#: taxonomies/gate.php:14
+msgid "Edit gate"
 msgstr "Editar puerta"
 
-#: taxonomies/door.php:15
-msgid "Update door"
+#: taxonomies/gate.php:15
+msgid "Update gate"
 msgstr "Actualizar puerta"
 
-#: taxonomies/door.php:16
-msgid "Add New door"
+#: taxonomies/gate.php:16
+msgid "Add New gate"
 msgstr "Añadir nueva puerta"
 
-#: taxonomies/door.php:17
-msgid "New Door Name"
-msgstr "Nombre de nueva puerta"
+#: taxonomies/gate.php:17
+msgid "New Gate Name"
+msgstr "Nuevo nombre de puerta"
 
-#: taxonomies/door.php:18
-msgid "Separate Doors with commas"
-msgstr "Separar puertas por comas"
+#: taxonomies/gate.php:18
+msgid "Separate Gates with commas"
+msgstr "Separar puertas con comas"
 
-#: taxonomies/door.php:19
-msgid "Add or remove doors"
+#: taxonomies/gate.php:19
+msgid "Add or remove gates"
 msgstr "Añadir o remover puertas"
 
-#: taxonomies/door.php:20
-msgid "Choose from the most used doors"
+#: taxonomies/gate.php:20
+msgid "Choose from the most used gates"
 msgstr "Escoger entre puertas mas usadas"
 
 #: taxonomies/place.php:7 taxonomies/place.php:21
@@ -293,7 +293,7 @@ msgstr "Añadir nuevo lugar"
 
 #: taxonomies/place.php:17
 msgid "New place Name"
-msgstr "Nombre de nuevo lugar"
+msgstr "Nuevo nombre de lugar"
 
 #: taxonomies/place.php:18
 msgid "Separate places with commas"
@@ -305,59 +305,59 @@ msgstr "Añadir o remover lugares"
 
 #: taxonomies/place.php:20
 msgid "Choose from the most used places"
-msgstr "Escoger entre lugares mas usados"
+msgstr "Escoger entre lugares mas populares"
 
 #: taxonomies/status.php:8 taxonomies/status.php:22
 msgid "Statuses"
-msgstr "Status"
+msgstr "Estados"
 
 #: taxonomies/status.php:9
 msgid "Status"
-msgstr "Status"
+msgstr "Estado"
 
 #: taxonomies/status.php:10
 msgid "Search statuses"
-msgstr "Buscar estatus"
+msgstr "Buscar estados"
 
 #: taxonomies/status.php:11
 msgid "Popular statuses"
-msgstr "Estatus populares"
+msgstr "Estados populares"
 
 #: taxonomies/status.php:12
 msgid "All statuses"
-msgstr "Todos los estatus"
+msgstr "Todos los estados"
 
 #: taxonomies/status.php:15
 msgid "Edit status"
-msgstr "Editar estatus"
+msgstr "Editar estado"
 
 #: taxonomies/status.php:16
 msgid "Update status"
-msgstr "Actualizar estatuss"
+msgstr "Actualizar estado"
 
 #: taxonomies/status.php:17
 msgid "Add New status"
-msgstr "Añadir nuevo estatus"
+msgstr "Añadir nuevo estado"
 
 #: taxonomies/status.php:18
 msgid "New status Name"
-msgstr "Nombre de nuevo estatus"
+msgstr "Nuevo nombre de estado"
 
 #: taxonomies/status.php:19
 msgid "Separate statuses with commas"
-msgstr "Separar estatus con comas"
+msgstr "Separar estados con comas"
 
 #: taxonomies/status.php:20
 msgid "Add or remove statuses"
-msgstr "Añadir o remover estatus"
+msgstr "Añadir o remover estados"
 
 #: taxonomies/status.php:21
 msgid "Choose from the most used statuses"
-msgstr "Escoger entre estatus mas usados"
+msgstr "Escoger entre estados mas usados"
 
 #: taxonomies/status.php:41 taxonomies/status.php:67
 msgid "Hide flight"
-msgstr "Ocultar vuelos"
+msgstr "Esconder vuelo"
 
 #: taxonomies/status.php:46 taxonomies/status.php:76
 msgid "Background color"

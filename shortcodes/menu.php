@@ -83,8 +83,8 @@ function flight_menu($attr){
                             <p>{{ titles.flight[index_subtitle] }}</p>
                         </th>
                         <th>
-                            <p class="p-title">{{ titles.door[index_title] }}</p>
-                            <p>{{ titles.door[index_subtitle] }}</p>
+                            <p class="p-title">{{ titles.gate[index_title] }}</p>
+                            <p>{{ titles.gate[index_subtitle] }}</p>
                         </th>
                         <th v-if="flight_selected.name == 'arrival'">
                             <p class="p-title">{{ titles.origin[index_title] }}</p>
@@ -121,7 +121,7 @@ function flight_menu($attr){
                         </td>
                         <td>
                             <p>
-                                {{flight.terms.door[0].name}}
+                                {{flight.terms.gate[0].name}}
                             </p>
                         </td>
                         <td>
