@@ -53,3 +53,69 @@ function remove_parent_taxonomy(){
 	</script>
 	<?php
 }
+
+
+
+function place_add_custom_field() {
+	?>
+
+    <div class="form-field">
+        <label for="english_name_txt"><?php _e( 'English name' ); ?></label>
+        <input required type="text" name="english_name_txt" id="english_name_txt">
+    </div>
+    <div class="form-field">
+        <label for="code_txt"><?php _e( 'Code' ); ?></label>
+        <input required type="text" name="code_txt" id="code_txt">
+    </div>
+
+	<?php
+}
+add_action( 'place_add_form_fields', 'place_add_custom_field', 10, 2 );
+
+
+function place_edit_custom_field($term) {
+	$english_name = get_term_meta($term->term_id, 'english_name_txt', true);
+	$code_txt = get_term_meta($term->term_id, 'code_txt', true);
+	?>
+    <tr class="form-field">
+        <th scope="row">
+            <label for="english_name_txt"><?php _e( 'English name' ); ?></label>
+        </th>
+        <td>
+            <input type="text" required name="english_name_txt" id="english_name_txt" value="<?php echo $english_name ?>" >
+        </td>
+    </tr>
+
+    <tr class="form-field">
+        <th scope="row">
+            <label for="code_txt"><?php _e( 'Code' ); ?></label>
+        </th>
+        <td>
+            <input type="text" required name="code_txt" id="code_txt" value="<?php echo $code_txt ?>" >
+        </td>
+    </tr>
+
+	<?php
+}
+add_action( 'place_edit_form_fields', 'place_edit_custom_field', 10, 2 );
+
+
+
+
+function save_taxonomy_place_meta_field( $term_id ) {
+
+	if ( isset( $_POST['english_name_txt'] )  && !empty( $_POST['english_name_txt'])) {
+		update_term_meta($term_id, 'english_name_txt', $_POST['english_name_txt']);
+	}else{
+		update_term_meta($term_id, 'english_name_txt', $_POST['name']);
+	}
+
+	if ( isset( $_POST['code_txt'] )  && !empty( $_POST['code_txt'])) {
+		update_term_meta($term_id, 'code_txt', $_POST['code_txt']);
+	}else{
+		update_term_meta($term_id, 'code_txt', '');
+	}
+
+}
+add_action( 'edited_place', 'save_taxonomy_place_meta_field', 10, 2 );
+add_action( 'create_place', 'save_taxonomy_place_meta_field', 10, 2 );

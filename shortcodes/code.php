@@ -33,7 +33,8 @@
             show_all : <?php echo $attr['menu'] ?>,
             index_title : 0,
             index_subtitle : 1,
-            interval : <?php echo $attr['interval'] ?>
+            interval_f : <?php echo $attr['interval_f'] ?>,
+            interval_b : <?php echo $attr['interval_b'] ?>
         },
         mounted (){
             this.getCurrentTime();
@@ -107,7 +108,8 @@
             urlListData : (url)=>{
                 url= new URL(url);
                 url.searchParams.append('current', flight_menu.getDateString());
-                url.searchParams.append('interval', flight_menu.interval);
+                url.searchParams.append('interval_f', flight_menu.interval_f);
+                url.searchParams.append('interval_b', flight_menu.interval_b);
 
                 fetch(url).then(response => response.json()).then((list)=>{
                     console.log(list)

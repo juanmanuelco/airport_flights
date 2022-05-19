@@ -10,13 +10,13 @@ function flightList(WP_REST_Request $request){
 
 	date_default_timezone_set('America/Guayaquil');
 
-	if(!isset($request['current']) || !isset($request['interval'])) return new WP_REST_Response('Parameters not found', 403);;
+	if(!isset($request['current']) || !isset($request['interval_f']) || !isset($request['interval_b'])) return new WP_REST_Response('Parameters not found', 403);;
 
 	$start = new DateTime($request['current']);
 	$final = new DateTime($request['current']);
 
-	date_add($start, date_interval_create_from_date_string("-{$request['interval']} hours"));
-	date_add($final, date_interval_create_from_date_string("{$request['interval']} hours"));
+	date_add($start, date_interval_create_from_date_string("-{$request['interval_b']} hours"));
+	date_add($final, date_interval_create_from_date_string("{$request['interval_f']} hours"));
 
 	try {
 		$args = array(
@@ -74,7 +74,9 @@ function flightList(WP_REST_Request $request){
 			$post_metas = get_post_meta($p);
 			foreach ($post_metas as $key => $post_meta){
 				if($key == '_wp_flight-destination_meta_key' || $key == '_wp_flight-origin_meta_key'){
-					$post_metas[$key] = get_term_by('id', $post_metas[$key][0] , 'place');
+					$place_meta = get_term_by('id', $post_metas[$key][0] , 'place');
+					$post_metas[$key] = $place_meta;
+					$post_metas[$key]->{'meta_data'} = get_term_meta($place_meta->term_id);
 				}
 			}
 			return [

@@ -15,7 +15,8 @@ function flight_menu($attr){
 	$attr = shortcode_atts( array(
 		'type' => 'a',
         'route' => 'n',
-        'interval' => 12,
+        'interval_f' => 12,
+		'interval_b' => 12,
         'menu' => 1
 	), $attr );
 	ob_start();
@@ -125,11 +126,21 @@ function flight_menu($attr){
                             </p>
                         </td>
                         <td>
-                            <p v-if="flight.meta_values['_wp_flight-destination_meta_key'] != undefined">
-                                {{flight.meta_values[`_wp_flight-destination_meta_key`].name}}
-                            </p>
-                            <p v-if="flight.meta_values['_wp_flight-origin_meta_key'] != undefined">
-                                {{flight.meta_values[`_wp_flight-origin_meta_key`].name}}
+                            <p>
+                                <strong v-if="flight.meta_values[`_wp_flight-origin_meta_key`].meta_data[`code_txt`] != undefined">
+                                    {{flight.meta_values[`_wp_flight-origin_meta_key`].meta_data[`code_txt`][0] }}
+                                </strong>
+                               <strong v-if="flight.meta_values['_wp_flight-destination_meta_key'] != undefined">
+                                   {{flight.meta_values[`_wp_flight-destination_meta_key`].name}}
+                               </strong>
+                                <br>
+                               <strong v-if="flight.meta_values['_wp_flight-origin_meta_key'] != undefined">
+                                   {{flight.meta_values[`_wp_flight-origin_meta_key`].name}}
+                               </strong>
+                                <br>
+                                <strong v-if="flight.meta_values[`_wp_flight-origin_meta_key`].meta_data[`english_name_txt`] != undefined">
+                                    {{flight.meta_values[`_wp_flight-origin_meta_key`].meta_data[`english_name_txt`][0] }}
+                                </strong>
                             </p>
                         </td>
                         <td>
