@@ -17,6 +17,7 @@ function flightPostType(){
 				'not_found_in_trash' => __( 'No flights found in the Trash', 'airport_flights' ),
 				'menu_name'          => 'Flights'
 			),
+			'show_in_menu' => false,
 			'public'              => true,
 			'capability_type'     => array('flight','flights'),
 			'map_meta_cap'        => true,
