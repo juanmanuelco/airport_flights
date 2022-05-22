@@ -44,10 +44,10 @@ function status_add_custom_field() {
     </div>
 
 
-    <div class="form-field">
-        <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
-        <input type="checkbox" name="status_hidden" id="status_hidden" >
-    </div>
+<!--    <div class="form-field">-->
+<!--        <label for="status_hidden">--><?php //_e( 'Hide flight' ); ?><!--</label>-->
+<!--        <input type="checkbox" name="status_hidden" id="status_hidden" >-->
+<!--    </div>-->
 
 	<div class="form-field">
 		<label for="status_bk_color"><?php _e( 'Background color' ); ?></label>
@@ -78,14 +78,14 @@ function status_edit_custom_field($term) {
         </td>
     </tr>
 
-    <tr class="form-field term-bk_color-wrap">
-        <th scope="row">
-            <label for="status_hidden"><?php _e( 'Hide flight' ); ?></label>
-        </th>
-        <td>
-            <input type="checkbox" name="status_hidden" id="status_hidden" <?php echo $status_hidden == 'on'? 'checked' : '' ;  ?> >
-        </td>
-    </tr>
+<!--    <tr class="form-field term-bk_color-wrap">-->
+<!--        <th scope="row">-->
+<!--            <label for="status_hidden">--><?php //_e( 'Hide flight' ); ?><!--</label>-->
+<!--        </th>-->
+<!--        <td>-->
+<!--            <input type="checkbox" name="status_hidden" id="status_hidden" --><?php //echo $status_hidden == 'on'? 'checked' : '' ;  ?><!-- >-->
+<!--        </td>-->
+<!--    </tr>-->
 
 	<tr class="form-field term-bk_color-wrap">
 		<th scope="row">
@@ -128,11 +128,11 @@ function save_taxonomy_status_meta_field( $term_id ) {
     }else{
 		update_term_meta($term_id, 'status_txt_color', '#000000');
     }
-	if ( isset( $_POST['status_hidden'] ) ) {
-		update_term_meta( $term_id, 'status_hidden', $_POST['status_hidden'] );
-    }else{
-		update_term_meta( $term_id, 'status_hidden', 'off' );
-    };
+//	if ( isset( $_POST['status_hidden'] ) ) {
+//		update_term_meta( $term_id, 'status_hidden', $_POST['status_hidden'] );
+//    }else{
+//		update_term_meta( $term_id, 'status_hidden', 'off' );
+//    };
 }
 add_action( 'edited_status', 'save_taxonomy_status_meta_field', 10, 2 );
 add_action( 'create_status', 'save_taxonomy_status_meta_field', 10, 2 );

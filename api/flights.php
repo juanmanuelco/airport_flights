@@ -46,16 +46,22 @@ function flightList(WP_REST_Request $request){
 					),
 					'type'  => 'DATETIME',
 					'compare' => 'BETWEEN'
-				)
+				),
+				array(
+					'key' => '_wp_flight-hidden_meta_key',
+					'value' => 'off',
+					'compare' => '=',
+				),
+
 			),
-			'tax_query' => array(
-				array (
-					'taxonomy' => 'status',
-					'field' => 'status_hidden',
-					'terms' => 'off',
-					'operator' => '=',
-				)
-			),
+//			'tax_query' => array(
+//				array (
+//					'taxonomy' => 'status',
+//					'field' => 'status_hidden',
+//					'terms' => 'off',
+//					'operator' => '=',
+//				)
+//			),
 		);
 		$posts = wp_list_pluck( (new WP_Query($args))->get_posts(), 'ID');
 		$posts = array_map(function ($p){

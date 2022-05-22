@@ -1,6 +1,6 @@
 <?php ?>
 <style>
-    #flight_app input, #flight_app select{
+    #flight_app input[type="text"] , #flight_app input[type="datetime-local"], #flight_app select{
         width: 100%;
     }
 </style>

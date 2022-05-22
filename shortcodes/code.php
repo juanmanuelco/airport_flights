@@ -29,6 +29,7 @@
             flight_list : [],
             width : window.innerWidth < 1250 ?  (window.innerWidth * 2) : window.innerWidth,
             urlInterval : null,
+            scrollingInterval : null,
             dateToShow : true,
             show_all : <?php echo $attr['menu'] ?>,
             index_title : 0,
@@ -103,7 +104,7 @@
                     flight_menu.urlListData(uri);
                     flight_menu.index_title = flight_menu.index_title === 0 ? 1: 0;
                     flight_menu.index_subtitle = flight_menu.index_subtitle === 0 ? 1: 0;
-                }, 3000000, url); //Quitar 2 ceros
+                }, 30000, url);
             },
             urlListData : (url)=>{
                 url= new URL(url);
@@ -112,7 +113,6 @@
                 url.searchParams.append('interval_b', flight_menu.interval_b);
 
                 fetch(url).then(response => response.json()).then((list)=>{
-                    console.log(list)
                     list.sort((a, b)=>{
                         let _a = new Date(a.meta_values['_wp_flight-estimate_meta_key'][0]);
                         let _b = new Date(b.meta_values['_wp_flight-estimate_meta_key'][0]);
@@ -121,6 +121,15 @@
                     flight_menu.flight_list = list;
                 }).finally(()=>{
                     flight_menu.loading = false;
+
+                    let interval_time = 100;
+                    clearInterval(flight_menu.scrollingInterval);
+                    flight_menu.scrollingInterval =  setInterval(()=>{
+                        window.scrollBy(0,interval_time);
+                        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight ||  window.scrollY == 0) {
+                            interval_time = (interval_time *-1);
+                        }
+                    }, 1000)
                 });
             },
             getHour : (fl)=>{

@@ -46,6 +46,8 @@ function wp_flight_type_callback($post){
 	$flight_code = get_post_meta( $post->ID, '_wp_flight-code_meta_key', true );
 	$flight_estimate = get_post_meta( $post->ID, '_wp_flight-estimate_meta_key', true );
 
+	$flight_hidden = get_post_meta( $post->ID, '_wp_flight-hidden_meta_key', true ) == 'on' ? 'checked' : '';
+
 	$flight_origin = get_post_meta( $post->ID, '_wp_flight-origin_meta_key', true );
 	$flight_destination = get_post_meta( $post->ID, '_wp_flight-destination_meta_key', true );
 
@@ -60,6 +62,11 @@ function wp_flight_type_callback($post){
     ?>
 
         <div style="display: flex; justify-content: space-between " id="flight_app">
+            <div>
+                <h3><?php echo __('Hide flight', 'airport_flights') ?></h3>
+                <input type="checkbox" name="flight_hidden" <?php echo $flight_hidden ?> >
+            </div>
+
             <div>
                 <h3><?php echo __('Flight type', 'airport_flights') ?></h3>
                 <select required name="flight_type" v-model="flight_type">
@@ -112,6 +119,12 @@ function save_flight( $post_id ) {
 	update_post_meta($post_id, '_wp_flight-route_meta_key', $_POST['flight_route']);
 	update_post_meta($post_id, '_wp_flight-code_meta_key', $_POST['flight_code']);
 	update_post_meta($post_id, '_wp_flight-estimate_meta_key', $_POST['flight_estimate']);
+
+    if(isset($_POST['flight_hidden'] )){
+	    update_post_meta($post_id, '_wp_flight-hidden_meta_key', 'on');
+    }else{
+	    update_post_meta($post_id, '_wp_flight-hidden_meta_key', 'off');
+    }
 
     if($_POST['flight_type'] == 'arrival'){
         unset($_POST['flight_destination']);

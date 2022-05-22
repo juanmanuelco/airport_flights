@@ -65,13 +65,22 @@
         font-size: 1.4em;
     }
     .flights_list_table {
-        overflow-x: scroll;
-        display: block;
-    }
-    .flights_list_table tbody{
         width: 100%;
-        display: inline-table;
     }
+
+    .flights_list_table thead{
+        overflow-y: auto;
+    }
+
+
+    .flights_list_table thead th { position: sticky; top: 140px; z-index: 1; }
+
+    #list_header_top{
+        position: sticky; top: 40px; z-index: 1;
+        background-color: white;
+    }
+
+
     .flights_list_table tr th {
         background-color: var(--wp-secundary) !important;
         color: var(--wp-light) !important;
