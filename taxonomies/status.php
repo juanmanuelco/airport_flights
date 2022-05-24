@@ -67,7 +67,7 @@ function status_edit_custom_field($term) {
 	$english_name = get_term_meta($term->term_id, 'english_name_txt', true);
 	$bk_color = get_term_meta($term->term_id, 'status_bk_color', true);
 	$txt_color = get_term_meta($term->term_id, 'status_txt_color', true);
-	$status_hidden = get_term_meta($term->term_id, 'status_hidden', true);
+//	$status_hidden = get_term_meta($term->term_id, 'status_hidden', true);
 	?>
     <tr class="form-field term-english_name-wrap">
         <th scope="row">
