@@ -76,7 +76,7 @@
     .flights_list_table thead th { position: sticky; top: 140px; z-index: 1; }
 
     #list_header_top{
-        position: sticky; top: 40px; z-index: 1;
+        position: sticky; top: 30px; z-index: 1;
         background-color: white;
     }
 

@@ -51,8 +51,8 @@ BEGIN
 END; 
 
 /* Ejemplo de como llamar la función*/
-CALL fill_flights ('arrival', 'national', 'A005', '2022-05-19T05:02', 'on', 33, 'viriginia', 'puerta-12', 'blocked');
-CALL fill_flights ('departure', 'international', 'A005', '2022-05-19T05:02', 'off', 33, 'viriginia', 'puerta-12', 'blocked');
+CALL fill_flights ('arrival', 'national', 'A005', '2022-05-19T05:02', 'on', 33, 'virginia', 'puerta-12', 'blocked');
+CALL fill_flights ('departure', 'international', 'A005', '2022-05-19T05:02', 'off', 33, 'virginia', 'puerta-12', 'blocked');
 
 
 

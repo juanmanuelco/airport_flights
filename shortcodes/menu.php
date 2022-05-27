@@ -17,7 +17,8 @@ function flight_menu($attr){
         'route' => 'n',
         'interval_f' => 12,
 		'interval_b' => 12,
-        'menu' => 1
+        'menu' => 1,
+        'scroll' => 10
 	), $attr );
 	ob_start();
 	?>
@@ -48,7 +49,7 @@ function flight_menu($attr){
 
         </div>
         <div class="flight-list" v-if="flight_selected != null && route_selected != null">
-            <div style="display: flex; justify-content: space-around" id="list_header_top">
+            <div style="display: flex; justify-content: space-around; padding-bottom:25px" id="list_header_top">
                 <div class="list-title">
                     <div class="icon-type" v-on:click="toggle_menu" style="cursor: pointer; background-color: var(--wp-primary)" v-if="show_all == 1">
                         <i v-bind:class="'fa-solid ' +  (show_menu ? 'fa-eye-slash' : 'fa-eye') + ' fa-2xl'"></i>
@@ -72,8 +73,8 @@ function flight_menu($attr){
             </div>
 
 
-            <div style="padding-top: 25px" v-if="!loading">
-                <table class="flights_list_table">
+            <div v-if="!loading">
+                <table class="flights_list_table" style="border-collapse: collapse;">
                     <thead>
                         <tr>
                             <th>
@@ -107,12 +108,12 @@ function flight_menu($attr){
                         </tr>
                     </thead>
                     <tbody id="flights_scroll_content" >
-                        <tr v-for="flight in flight_list" v-if="flight.terms.status[0].values['status_hidden'][0] == 'off' ">
+                        <tr v-for="flight in flight_list" style="border: 1px solid rgba(0,0,0,0.1)">
                             <td>
                                 <img
                                         v-bind:src="flight.terms.airline[0].values.airline_image[0]"
                                         v-if="flight.terms.airline != false && flight.terms.airline[0].values.airline_image != false"
-                                        style="height: 100px;">
+                                        style="width: 150px;">
                                 <span v-if="flight.terms.airline == false || flight.terms.airline[0].values.airline_image == false">
                                     {{ flight.terms.airline[0].name }}
 

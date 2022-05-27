@@ -34,6 +34,7 @@
             show_all : <?php echo $attr['menu'] ?>,
             index_title : 0,
             index_subtitle : 1,
+            scroll_value : <?php echo $attr['scroll'] ?>,
             interval_f : <?php echo $attr['interval_f'] ?>,
             interval_b : <?php echo $attr['interval_b'] ?>
         },
@@ -129,7 +130,7 @@
                         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight ||  window.scrollY == 0) {
                             interval_time = (interval_time *-1);
                         }
-                    }, 1000)
+                    }, (flight_menu.scroll_value * 1000))
                 });
             },
             getHour : (fl)=>{
