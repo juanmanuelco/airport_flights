@@ -3,7 +3,7 @@
 /*
 Plugin Name: Airport Flights
 description: All you need for Airport flights management
-Version: 0.0.2
+Version: 0.0.3
 Author: JUAN CUÑEZ
 */
 
